@@ -18,7 +18,7 @@ $fecfin = date("Y-m-d", strtotime($cnn->result('fecfin')));
 ?>
 
 <head>
-    <title> Tablero Indicadores 33 </title>
+    <title> Tablero Indicadores </title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
