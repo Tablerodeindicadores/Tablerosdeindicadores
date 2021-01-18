@@ -7,7 +7,7 @@ var myNum1 = "";
 var myNum2 = "";
 var myUser = "";
 var myChart = "";
-var NChart = 0; 
+var NChart = 1; 
 var myPar1 = "";
 var myPar2 = "";
 var myPar3  = "";
@@ -82,17 +82,19 @@ function GenChartOpcs() {
     "fecfin":  myPar2,
     "tipo"  :  myPar3,
   }
-  Datos   = TraeDatos("chart/opnegadas.php", Parms);
+  //Datos   = TraeDatos("chart/opnegadas.php", Parms);
+  Datos   = TraeDatos("data.json");
     
-  myCtx   = $("#chartCanvas")[0];  
-  myCtx.height = 380;
-  myChart = CreaChartOpcNeg(myCtx,  Datos) ;
-  myCtx.addEventListener("click", function(evento){
-    Neg_DrillDown(evento);
-  }); 
-  CreateTable_4cols(Datos, 0,2)
-  //CreaTablaOpcNeg(Datos);
-  TotalesNeg(Datos);
+  // myCtx   = $("#chartCanvas")[0];  
+  // myCtx.height = 380;
+  // myChart = CreaChartOpcNeg(myCtx,  Datos) ;
+  // myCtx.addEventListener("click", function(evento){
+  //   Neg_DrillDown(evento);
+  // }); 
+
+  GenerateTable(Datos);
+  
+  //TotalesNeg(Datos);
 };
 
 function Neg_DrillDown (evt) {
@@ -464,93 +466,6 @@ function ChartOpc(){
   
 }
 
-function ChartTick(){
-  NChart = 1;
-  
-  Opciones = document.querySelector("#Tipo");
-  Opciones.innerHTML = "<option>Sucursal</option>"
-
-  Inicializa(NChart);
-  
-}
-/*
-function ChartEstCar(){
-  NChart = 0;
-  Opciones = document.querySelector("#Tipo");
-  Opciones.innerHTML = "<option>Sucursal</option><option>Division</option>";
-  Opciones.children[0].selected=true;
-  Inicializa(NChart);
-  
-}
-
-function ChartAnt(){
-  NChart = 1;
-  
-  Opciones = document.querySelector("#Tipo");
-  Opciones.innerHTML = "<option>Sucursal</option>"
-
-  Inicializa(NChart);
-  
-}
-
-function ChartRecu(){
-  NChart = 1;
-  
-  Opciones = document.querySelector("#Tipo");
-  Opciones.innerHTML = "<option>Sucursal</option>"
-
-  Inicializa(NChart);
-  
-}
-function ChartPla(){
-  NChart = 0;
-  Opciones = document.querySelector("#Tipo");
-  Opciones.innerHTML = "<option>Sucursal</option><option>Division</option>";
-  Opciones.children[0].selected=true;
-  Inicializa(NChart);
-  
-}
-
-function ChartEst(){
-  NChart = 1;
-  
-  Opciones = document.querySelector("#Tipo");
-  Opciones.innerHTML = "<option>Sucursal</option>"
-
-  Inicializa(NChart);
-  
-}
-
-function ChartRot(){
-  NChart = 1;
-  
-  Opciones = document.querySelector("#Tipo");
-  Opciones.innerHTML = "<option>Sucursal</option>"
-
-  Inicializa(NChart);
-  
-}
-
-function ChartRecu(){
-  NChart = 1;
-  
-  Opciones = document.querySelector("#Tipo");
-  Opciones.innerHTML = "<option>Sucursal</option>"
-
-  Inicializa(NChart);
-  
-}
-
-function ChartPla(){
-  NChart = 1;
-  
-  Opciones = document.querySelector("#Tipo");
-  Opciones.innerHTML = "<option>Sucursal</option>"
-
-  Inicializa(NChart);
-  
-}*/
-
 function CreaVarsHTML() {
   //Crea variables para manejo JavaScript conectadas a elementos HTML
   myTitulo = $('#Titulo')[0];
@@ -595,6 +510,7 @@ function CreateTable_3cols(entry) {
    for (k in columnsIn) {
      keys.push(k);
    }
+
    for (i in keys) {
      str = "<th>" + keys[i] + "</th>";
      $('#tabladatos').find('thead tr').append(str);
@@ -625,18 +541,21 @@ function CreateTable_3cols(entry) {
 };
 
 function CreateTable_4cols(entry) {
-
-  $("thead").remove("#tabladatos");
-  $('#tabladatos').DataTable().destroy();
+  // quitar encabezados
+  var Tr = document.querySelector("tr");
+  Tr.parentNode.removeChild(Tr);
+  // recuperar nombres columnas de entry
   let keys = [];
   let columnsIn = entry[0]; 
   for (let k in columnsIn) {
     keys.push(k);
   }
+  // agregar encabezados
   for (let i in keys) {
     let str = "<th>" + keys[i] + "</th>";
     $('#tabladatos').find('thead tr').append(str);
   }
+  // agregar datos en tbody
   $('#tabladatos').DataTable( {
     "aaData"  : entry,
     "paging"  : false,
@@ -647,7 +566,79 @@ function CreateTable_4cols(entry) {
           { "data": keys[0] },
           { "data": keys[1] },
           { "data": keys[2] },
-         // { "data": keys[3] }          
+          { "data": keys[3] }          
       ]
   });
 };
+
+
+function GenerateTable(records){
+  
+  // var tabla = document.querySelector("#tabladatos");
+  // if (tabla !== null ) {    
+  //   tabla.parentNode.removeChild(tabla);
+  // }
+
+  //Obtener los nombres de las columnas
+  var headername = Object.keys(records[0]);
+  //Construir el Html para los encabezados
+  var headerHTML = MakeColumnHeaderHtml(headername);
+  var columns = [];
+
+  const container = document.querySelector('#tabladatos');
+  removeAllChildNodes(container);
+
+  //append table header
+  $('#tabladatos').append(headerHTML);
+
+  //create a column definition
+  for (var i = 0; i < headername.length; i++) {
+    columns.push( { "data": headername[i] });
+  }
+
+  // inicializa la tabla con sus definiciones
+  var dtable = $('#tabladatos').DataTable(getDatatableDef(columns));
+
+  // agregar datos a la tabla
+  dtable.rows.add(records).draw();
+
+  //var table = $('#tabladatos').DataTable();
+
+  //table.row.add([{"gpo":"TRIANA","opc":"24", "neg":"22", "porc": "55%"}]).draw();
+  //table.rows.add(records);
+  //dtable.draw();
+
+}
+
+function MakeColumnHeaderHtml (columnHeaderNames) {
+  var table_head = "<thead class= 'table-header'><tr>";
+
+  $.each(columnHeaderNames, function (data, value) {
+
+    table_head += '<th>';
+    table_head += value;
+    table_head += '</th>';
+  });
+  table_head += '</tr></thead>';
+  return table_head;
+}
+
+function getDatatableDef(columnDef) {
+   var datatableformat = {
+
+      columns: columnDef,
+      paging:false,
+      info: false,
+      searching: false,
+      ordering : false,
+      bFilter  : false
+   };
+   return datatableformat
+
+}
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
+}

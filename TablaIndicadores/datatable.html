@@ -1,0 +1,53 @@
+
+
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v 4.5.3-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
+    <!-- DataTables  -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="css/basico.css"> 
+
+</head>	
+<body>
+	<div id= "sidebar-container" >
+		<div class = "text-center">
+     		<h1 class="display-4">Chart y Tabla de datos</h1>
+	 		<p> Ejemplo</p>
+	 		<button id="myBtn" onclick="GenTable1()">Datos1</button>
+	 		<button id="myBtn" onclick="GenTable2()">Datos2</button>
+		</div>
+	</div>
+	<nav class="navbar navbar-expand">
+
+	</nav>
+	<section >
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-7 my-3">
+
+					<div id="chartReport">
+						<canvas id="chartCanvas"></canvas>
+					</div>
+                </div>
+				<div class="col-lg-5 my-3">
+					<div class="card-body pt-2">
+   						<table id="myTable" class="display" style="width:100%">
+  						</table>
+ 					</div>
+                </div>
+			</div>
+		</div>
+
+    </section>
+
+
+    <script type="text/javascript" src="js/jquery-2.1.4.js" ></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+    <script type="text/javascript" src="table.js" ></script>
+  
+</body>

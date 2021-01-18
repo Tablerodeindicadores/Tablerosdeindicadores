@@ -1,0 +1,17 @@
+[
+	{ 
+	   "gpo":"HIDALGO", 
+	   "ventas":"1,457,489",
+	   "unidades":"45,789",
+	},
+	{
+	   "gpo":"ALLENDE", 
+	   "ventas":"740,978",
+	   "unidades":"9,714",
+	}	
+	{
+       "gpo":"MATRIZ", 
+	   "ventas":"4,758,415",
+	   "unidades":"87,512",
+	},
+]

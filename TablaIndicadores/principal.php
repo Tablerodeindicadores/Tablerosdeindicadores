@@ -31,7 +31,7 @@ $fecfin = date("Y-m-d", strtotime($cnn->result('fecfin')));
     <!-- awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- DataTables  -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     
@@ -50,9 +50,9 @@ $fecfin = date("Y-m-d", strtotime($cnn->result('fecfin')));
                 <li class="pagenav">
                   <h4><a href="" class="text-light p-0 border-0"><ion-icon name="stats"></ion-icon> Operaciones</a><i class="fa fa-angle-right"></i></h4>
                   <ul>
-                    <li onClick="ChartVta()"  class="page_item"><a href="#">Ventas Netas</a></li>
-                    <li onClick="ChartOpc()"  class="page_item"><a href="#">Opciones Negadas</a></li>
-                    <li onClick="ChartTick()" class="page_item"><a href="#"> Tickets</a></li>
+                    <li onClick="ChartVta()" class="page_item current_page_item"><a href="#">Ventas Netas</a></li>
+                    <li onClick="ChartOpc()" class="page_item"><a href="#">Opciones Negadas</a></li>
+                    <li id="tickets" class="page_item"><a href="#"> Tickets</a></li>
                   </ul>
                 </li>
               </ul>
@@ -83,7 +83,7 @@ $fecfin = date("Y-m-d", strtotime($cnn->result('fecfin')));
         </div>
         <!-- Fin sidebar -->
 
-4        <div class="w-100">
+        <div class="w-100">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div class="container">
     
@@ -116,19 +116,17 @@ $fecfin = date("Y-m-d", strtotime($cnn->result('fecfin')));
                       <a class="dropdown-item" href="#">Suscripciones</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Cerrar sesión</a>
-                      
                     </div>
                   </li>
                 </ul>
- +´
- +             </div>
+              </div>
             </div>
           </nav>
           <!-- Fin Navbar -->
 
         <!-- Page Content -->
         <div id="content" class="bg-grey w-100">
-        <section class="bg-mix py-1">
+              <section class="bg-mix py-1">
                 <div class="container">
                     <div class="card rounded-0">
                         <div class="card-body p-0">
@@ -173,8 +171,7 @@ $fecfin = date("Y-m-d", strtotime($cnn->result('fecfin')));
                                     <h6 class="font-weight-bold mb-0">Detalle</h6>
                                 </div>
                                 <div class="card-body pt-2">
-                                  <table id="tabladatos" class="hover" style="width:100%" >
-                                    <thead><tr></tr></thead>
+                                  <table id="tabladatos" class="display" style="width:100%" >
                                   </table>
                                   <button class="btn btn-primary w-100">Ver todas</button>
                                 </div>
@@ -183,22 +180,23 @@ $fecfin = date("Y-m-d", strtotime($cnn->result('fecfin')));
                       </div>
                   </div>
               </section>
-          </div>
         </div> <!--content -->
-
 </div> <!-- content-wrapper -->
 
 
 <!-- JQuery v 2.1.4-->    
-<script type="text/javascript" src="js/jquery-2.1.4.js" ></script>
+<!--<script type="text/javascript" src="js/jquery-2.1.4.js" ></script>-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- Chart.Js      -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-<!-- bootstrap v 4.5.3-->
+
 <script src="js/jquery.datetimepicker.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<!-- bootstrap v 4.5.3-->
 <script src="js/bootstrap.min.js"></script>
 <!-- datatables -->
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+<script type="text/javascript" src= "https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
 <!-- ionocons -->
 <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 <!-- app-js        -->

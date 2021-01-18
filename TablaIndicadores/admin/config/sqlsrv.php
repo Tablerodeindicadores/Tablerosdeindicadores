@@ -14,7 +14,6 @@
 		public function __construct($tipo, $auth )
 		{
 			$this->auth = $auth;
-
 			if ($tipo = 'l') {
 		  	    $local  = array ( "ZTSISPC03-PC\SQLEXPRESS", "Sirco", "", "", "{SQL Server}" );
 			}
@@ -31,7 +30,7 @@
 			   
 			   if ($auth = 'w') {
 					$connectionInfo = array( "Database"=>$this->basedatos);
-				}
+			   }
 			   else {
 			        $connectionInfo = array( "Database"=>$this->basedatos, "UID"=>$this->usuario, "PWD"=>$this->contrasena);				   
 			   }			   
@@ -49,8 +48,8 @@
 			   }catch (Exception $e) {
    	              $this->conexion = 'Error de conexión' ;
 	              echo "ERROR: ". $e->getMessage();
-			   }	   
-			}
+			   }	
+			}      
 			
         }
 		

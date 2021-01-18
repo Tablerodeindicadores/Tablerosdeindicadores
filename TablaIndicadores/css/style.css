@@ -8,7 +8,7 @@ html {
     min-height: 100%; }
 
 body {
-    background: #456;
+    /* background: #456; */
     padding-bottom: 60px;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -40,7 +40,7 @@ a:hover {
     background-color: var(--primary);
 }
 
-#sidebar-container {
+/* #sidebar-container {
     min-height: 100vh;
 }
   
@@ -54,7 +54,7 @@ a:hover {
 
 #sidebar-container .menu {
     width: 10rem;
-}
+} */
 
 #content {
     overflow-y: scroll;
